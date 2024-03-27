@@ -1,10 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { UserButton } from "@clerk/nextjs";
 
-export default function Home() {
+export default function SetupPage() {
   return (
-    <>
-      <p>Hi from admin.</p>
-      <Button>Submit</Button>
-    </>
+    <div className="h-screen p-20">
+      <UserButton showName />
+    </div>
   );
 }
