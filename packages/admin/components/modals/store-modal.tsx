@@ -1,9 +1,13 @@
 "use client";
 
+import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { ReloadIcon } from "@radix-ui/react-icons";
+import { toast } from "sonner";
 
+import * as StoreApi from "@/lib/api/store";
 import { Modal } from "@/components/ui/modal";
 import { useStoreModal } from "@/hooks/use-store-modal";
 import { Button } from "@/components/ui/button";
@@ -27,6 +31,10 @@ const FormSchema = z.object({
 export function StoreModal() {
   const { isOpen, onClose } = useStoreModal();
 
+  const mutation = useMutation({
+    mutationFn: StoreApi.create,
+  });
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -35,7 +43,7 @@ export function StoreModal() {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
+    mutation.mutate(data);
   }
 
   return (
@@ -56,7 +64,11 @@ export function StoreModal() {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="E-Commerce" {...field} />
+                      <Input
+                        disabled={mutation.isPending}
+                        placeholder="Store name"
+                        {...field}
+                      />
                     </FormControl>
                     <FormDescription>
                       The name of your store. You can change this later.
@@ -66,11 +78,21 @@ export function StoreModal() {
                 )}
               />
               <div className="pt-6 space-x-2 flex items-center justify-end w-full">
-                <Button variant="outline" onClick={onClose}>
+                <Button
+                  disabled={mutation.isPending}
+                  variant="outline"
+                  // onClick={onClose}
+                  onClick={() => toast("Store creation cancelled")}
+                >
                   Cancel
                 </Button>
 
-                <Button type="submit">Continue</Button>
+                <Button type="submit" disabled={mutation.isPending}>
+                  {mutation.isPending && (
+                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                  )}
+                  Continue
+                </Button>
               </div>
             </form>
           </Form>
