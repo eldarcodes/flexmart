@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import { ModalProvider } from "@/providers/modal-provider";
+import { QueryProvider } from "@/providers/query-provider";
 
 import "./globals.css";
 
@@ -20,14 +21,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>
-          <ModalProvider />
+    <QueryProvider>
+      <ClerkProvider>
+        <html lang="en">
+          <body className={inter.className}>
+            <ModalProvider />
 
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
+            {children}
+          </body>
+        </html>
+      </ClerkProvider>
+    </QueryProvider>
   );
 }
