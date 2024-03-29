@@ -1,0 +1,16 @@
+{
+  "name": "flexmart",
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": {
+    "name": "Eldar Mirzabekov",
+    "email": "eldarcodes@icloud.com",
+    "url": "https://eldarcodes.com"
+  },
+  "scripts": {
+    "admin:dev": "npm run dev --workspace @flexmart/admin",
+    "admin:build": "npm run build --workspace @flexmart/admin"
+  }
+}
