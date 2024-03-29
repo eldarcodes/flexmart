@@ -1,14 +1,27 @@
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 import { MainNavigation } from "@/components/main-navigation";
+import { StoreSwitcher } from "@/components/store-switcher";
+import { db } from "@/lib/db";
 
-interface NavbarProps {}
+export async function Navbar() {
+  const { userId } = auth();
 
-export function Navbar({}: NavbarProps) {
+  if (!userId) {
+    redirect("/sign-in");
+  }
+
+  const stores = await db.store.findMany({
+    where: {
+      userId,
+    },
+  });
+
   return (
     <div className="border-b">
       <div className="flex h-16 items-center px-4">
-        <div>Store switcher</div>
+        <StoreSwitcher stores={stores} />
 
         <MainNavigation />
 

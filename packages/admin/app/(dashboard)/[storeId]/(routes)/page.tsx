@@ -17,9 +17,11 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
   }
 
   return (
-    <>
+    <div className="p-4">
       <h3>Dashboard page</h3>
-      <div>Active store: {store.name}</div>
-    </>
+      <div>
+        Active store: <b>{store.name}</b>
+      </div>
+    </div>
   );
 }
