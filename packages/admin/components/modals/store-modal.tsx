@@ -77,15 +77,18 @@ export function StoreModal() {
                   </FormItem>
                 )}
               />
+
               <div className="pt-6 space-x-2 flex items-center justify-end w-full">
-                <Button
-                  disabled={mutation.isPending}
-                  variant="outline"
-                  // onClick={onClose}
-                  onClick={() => toast("Store creation cancelled")}
-                >
-                  Cancel
-                </Button>
+                {hasStores && (
+                  <Button
+                    type="button"
+                    disabled={mutation.isPending}
+                    variant="outline"
+                    onClick={onClose}
+                  >
+                    Cancel
+                  </Button>
+                )}
 
                 <Button type="submit" disabled={mutation.isPending}>
                   {mutation.isPending && (
