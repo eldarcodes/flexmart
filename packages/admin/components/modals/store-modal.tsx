@@ -38,7 +38,7 @@ export function StoreModal() {
   });
 
   const mutation = useMutation({
-    mutationFn: StoreApi.create,
+    mutationFn: (data: StoreApi.CreateStoreInput) => StoreApi.create(data),
     onSuccess: (response) => {
       toast.success("Store created successfully.");
       window.location.assign(`/${response.data.id}`);
@@ -109,7 +109,7 @@ export function StoreModal() {
                   {mutation.isPending && (
                     <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                   )}
-                  Continue
+                  Create
                 </Button>
               </div>
             </form>
