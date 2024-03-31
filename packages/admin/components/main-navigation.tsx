@@ -11,6 +11,10 @@ export function MainNavigation() {
 
   const routes = [
     {
+      href: `/${params.storeId}`,
+      label: "Overview",
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: "Settings",
     },
