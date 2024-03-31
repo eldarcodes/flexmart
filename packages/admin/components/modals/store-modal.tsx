@@ -1,11 +1,12 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 import * as StoreApi from "@/lib/api/store";
 import { Modal } from "@/components/ui/modal";
@@ -30,9 +31,23 @@ const FormSchema = z.object({
 
 export function StoreModal() {
   const { isOpen, onClose } = useStoreModal();
+  const router = useRouter();
+
+  const { data: stores } = useQuery({
+    queryKey: ["stores"],
+    queryFn: StoreApi.list,
+    refetchOnWindowFocus: false,
+  });
 
   const mutation = useMutation({
     mutationFn: StoreApi.create,
+    onSuccess: (response) => {
+      toast.success("Store created successfully.");
+      window.location.assign(`/${response.data.id}`);
+    },
+    onError: () => {
+      toast.error("Failed to create a store.");
+    },
   });
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -45,6 +60,8 @@ export function StoreModal() {
   function onSubmit(data: z.infer<typeof FormSchema>) {
     mutation.mutate(data);
   }
+
+  const hasStores = !!stores && stores.data.length > 0;
 
   return (
     <Modal
