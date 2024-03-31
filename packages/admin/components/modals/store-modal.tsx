@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 import * as StoreApi from "@/lib/api/store";
 import { Modal } from "@/components/ui/modal";
@@ -31,7 +30,6 @@ const FormSchema = z.object({
 
 export function StoreModal() {
   const { isOpen, onClose } = useStoreModal();
-  const router = useRouter();
 
   const { data: stores } = useQuery({
     queryKey: ["stores"],
