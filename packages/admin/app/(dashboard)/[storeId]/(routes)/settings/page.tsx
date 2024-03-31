@@ -6,6 +6,7 @@ import { StoreSettingsForm } from "@/components/forms/store-settings-form";
 import { db } from "@/lib/db";
 
 import { StoreSettingsHeading } from "./components/store-settings-heading";
+import { EnvVars } from "./components/env-vars";
 
 interface SettingsPageProps {
   params: {
@@ -38,6 +39,10 @@ export default async function SettingsPage({ params }: SettingsPageProps) {
         <Separator />
 
         <StoreSettingsForm store={store} />
+
+        <Separator />
+
+        <EnvVars />
       </div>
     </div>
   );
