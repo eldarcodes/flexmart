@@ -15,6 +15,10 @@ export function MainNavigation() {
       label: "Overview",
     },
     {
+      href: `/${params.storeId}/billboards`,
+      label: "Billboard",
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: "Settings",
     },
