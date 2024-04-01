@@ -20,6 +20,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { ImageUpload } from "@/components/image-upload";
 
 interface BillboardFormProps {
   billboard: Billboard | null;
@@ -76,6 +77,26 @@ export function BillboardForm({ billboard }: BillboardFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+        <FormField
+          control={form.control}
+          name="imageUrl"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Background image</FormLabel>
+              <FormControl>
+                <ImageUpload
+                  value={field.value ? [field.value] : []}
+                  disabled={saveBillboardMutation.isPending}
+                  onChange={(url) => field.onChange(url)}
+                  onRemove={() => field.onChange("")}
+                />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <div className="grid grid-cols-3 gap-8">
           <FormField
             control={form.control}
@@ -87,25 +108,6 @@ export function BillboardForm({ billboard }: BillboardFormProps) {
                   <Input
                     disabled={saveBillboardMutation.isPending}
                     placeholder="Enter billboard label"
-                    {...field}
-                  />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="imageUrl"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Image</FormLabel>
-                <FormControl>
-                  <Input
-                    disabled={saveBillboardMutation.isPending}
-                    placeholder="Image URL"
                     {...field}
                   />
                 </FormControl>
