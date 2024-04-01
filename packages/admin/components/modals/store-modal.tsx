@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 import * as StoreApi from "@/lib/api/store";
 import { Modal } from "@/components/ui/modal";
@@ -31,7 +30,6 @@ const FormSchema = z.object({
 
 export function StoreModal() {
   const { isOpen, onClose } = useStoreModal();
-  const router = useRouter();
 
   const { data: stores } = useQuery({
     queryKey: ["stores"],
@@ -40,7 +38,7 @@ export function StoreModal() {
   });
 
   const mutation = useMutation({
-    mutationFn: StoreApi.create,
+    mutationFn: (data: StoreApi.CreateStoreInput) => StoreApi.create(data),
     onSuccess: (response) => {
       toast.success("Store created successfully.");
       window.location.assign(`/${response.data.id}`);
@@ -111,7 +109,7 @@ export function StoreModal() {
                   {mutation.isPending && (
                     <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                   )}
-                  Continue
+                  Create
                 </Button>
               </div>
             </form>
