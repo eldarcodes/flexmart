@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Trash } from "lucide-react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Billboard } from "@prisma/client";
 
 import * as BillboardApi from "@/lib/api/billboard";
@@ -20,16 +20,19 @@ export function BillboardHeading({ billboard }: BillboardHeadingProps) {
   const [open, setOpen] = useState(false);
 
   const router = useRouter();
+  const params = useParams();
 
   const removeBillboardMutation = useMutation({
     mutationFn: () => {
-      return BillboardApi.remove(billboard?.id || "");
+      return BillboardApi.remove(billboard?.storeId || "", billboard?.id || "");
     },
     onSuccess: () => {
       toast.success("Billboard deleted successfully.");
-      router.refresh();
+      setOpen(false);
+      router.push(`/${params.storeId}/billboards`);
     },
     onError: () => {
+      setOpen(false);
       toast.error("Failed to delete a billboard.");
     },
   });

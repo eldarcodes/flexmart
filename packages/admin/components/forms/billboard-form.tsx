@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Billboard } from "@prisma/client";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import * as BillboardApi from "@/lib/api/billboard";
 import { Button } from "@/components/ui/button";
@@ -35,13 +35,14 @@ const FormSchema = z.object({
 
 export function BillboardForm({ billboard }: BillboardFormProps) {
   const router = useRouter();
+  const params = useParams();
 
   const saveBillboardMutation = useMutation({
     mutationFn: (data: BillboardApi.UpdateBillboardInput) => {
       if (billboard) {
-        return BillboardApi.update(billboard.id, data);
+        return BillboardApi.update(billboard.storeId, billboard.id, data);
       } else {
-        return BillboardApi.create(data);
+        return BillboardApi.create(String(params.storeId), data);
       }
     },
 
@@ -51,7 +52,7 @@ export function BillboardForm({ billboard }: BillboardFormProps) {
           ? "Billboard updated successfully."
           : "Billboard created successfully."
       );
-      router.refresh();
+      router.push(`/${params.storeId}/billboards`);
     },
     onError: () => {
       toast.error(
