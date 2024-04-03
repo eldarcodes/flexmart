@@ -9,18 +9,25 @@ export interface UpdateBillboardInput {
   label: string;
 }
 
-export const list = async () => {
-  return axios.get<Store[]>("/api/billboards");
+export const list = async (storeId: string) => {
+  return axios.get<Store[]>(`/api/stores/${storeId}/billboards`);
 };
 
-export const create = async (data: CreateBillboardInput) => {
-  return axios.post<Store>("/api/billboards", data);
+export const create = async (storeId: string, data: CreateBillboardInput) => {
+  return axios.post<Store>(`/api/stores/${storeId}/billboards`, data);
 };
 
-export const update = async (id: string, data: UpdateBillboardInput) => {
-  return axios.patch<Store>(`/api/billboards/${id}`, data);
+export const update = async (
+  storeId: string,
+  billboardId: string,
+  data: UpdateBillboardInput
+) => {
+  return axios.patch<Store>(
+    `/api/stores/${storeId}/billboards/${billboardId}`,
+    data
+  );
 };
 
-export const remove = async (id: string) => {
-  return axios.delete(`/api/billboards/${id}`);
+export const remove = async (storeId: string, billboardId: string) => {
+  return axios.delete(`/api/stores/${storeId}/billboards/${billboardId}`);
 };
