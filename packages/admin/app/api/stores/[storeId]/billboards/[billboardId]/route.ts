@@ -33,7 +33,7 @@ export async function DELETE(
     const { userId } = auth();
 
     if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("Unauthenticated", { status: 401 });
     }
 
     if (!params.billboardId) {
@@ -48,7 +48,7 @@ export async function DELETE(
     });
 
     if (!storeByUserId) {
-      return new NextResponse("Unauthorized", { status: 405 });
+      return new NextResponse("Unauthorized", { status: 403 });
     }
 
     const billboard = await db.billboard.deleteMany({
@@ -76,7 +76,7 @@ export async function PATCH(
     const { label, imageUrl } = body;
 
     if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("Unauthenticated", { status: 401 });
     }
 
     if (!label) {
@@ -99,7 +99,7 @@ export async function PATCH(
     });
 
     if (!storeByUserId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("Unauthorized", { status: 403 });
     }
 
     const billboard = await db.billboard.update({
