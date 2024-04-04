@@ -6,6 +6,8 @@ import { Separator } from "@/components/ui/separator";
 
 import { BillboardsHeading } from "./components/billboards-heading";
 import { BillboardsList } from "./components/billboards-list";
+import { Heading } from "@/components/ui/heading";
+import { ApiList } from "@/components/api-list";
 
 interface BillboardsPageProps {
   params: {
@@ -43,10 +45,12 @@ export default async function BillboardsPage({ params }: BillboardsPageProps) {
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
         <BillboardsHeading />
-
         <Separator />
-
         <BillboardsList billboards={billboards} />
+
+        <Heading title="API" description="API calls for billboards" />
+        <Separator />
+        <ApiList entityName="billboards" entityIdName="billboardId" />
       </div>
     </div>
   );
