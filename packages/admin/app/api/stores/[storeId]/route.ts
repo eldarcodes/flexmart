@@ -14,7 +14,7 @@ export async function PATCH(
     const { name } = body;
 
     if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("Unauthenticated", { status: 401 });
     }
 
     if (!name) {
@@ -50,7 +50,7 @@ export async function DELETE(
     const { userId } = auth();
 
     if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("Unauthenticated", { status: 401 });
     }
 
     if (!params.storeId) {
@@ -67,6 +67,28 @@ export async function DELETE(
     return NextResponse.json({
       message: "Store deleted successfully",
     });
+  } catch (error) {
+    console.log("[STORE_DELETE]", error);
+    return new NextResponse("Internal error", { status: 500 });
+  }
+}
+
+export async function GET(
+  req: Request,
+  { params }: { params: { storeId: string } }
+) {
+  try {
+    if (!params.storeId) {
+      return new NextResponse("Store ID is required", { status: 400 });
+    }
+
+    const store = await db.store.findFirst({
+      where: {
+        id: params.storeId,
+      },
+    });
+
+    return NextResponse.json(store);
   } catch (error) {
     console.log("[STORE_DELETE]", error);
     return new NextResponse("Internal error", { status: 500 });
