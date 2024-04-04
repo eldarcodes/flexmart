@@ -27,8 +27,10 @@ export function BillboardHeading({ billboard }: BillboardHeadingProps) {
       return BillboardApi.remove(billboard?.storeId || "", billboard?.id || "");
     },
     onSuccess: () => {
-      toast.success("Billboard deleted successfully.");
       setOpen(false);
+      toast.success("Billboard deleted successfully.");
+
+      router.refresh();
       router.push(`/${params.storeId}/billboards`);
     },
     onError: () => {

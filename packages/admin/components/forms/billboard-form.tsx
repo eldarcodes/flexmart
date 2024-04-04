@@ -52,6 +52,8 @@ export function BillboardForm({ billboard }: BillboardFormProps) {
           ? "Billboard updated successfully."
           : "Billboard created successfully."
       );
+
+      router.refresh();
       router.push(`/${params.storeId}/billboards`);
     },
     onError: () => {

@@ -51,7 +51,7 @@ export async function DELETE(
       return new NextResponse("Unauthorized", { status: 405 });
     }
 
-    const billboard = await db.billboard.delete({
+    const billboard = await db.billboard.deleteMany({
       where: {
         id: params.billboardId,
       },

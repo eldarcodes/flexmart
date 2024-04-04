@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { Separator } from "@/components/ui/separator";
 
 import { BillboardsHeading } from "./components/billboards-heading";
+import { BillboardsList } from "./components/billboards-list";
 
 interface BillboardsPageProps {
   params: {
@@ -45,18 +46,7 @@ export default async function BillboardsPage({ params }: BillboardsPageProps) {
 
         <Separator />
 
-        <ul>
-          {billboards.map((billboard) => (
-            <li key={billboard.id}>
-              <a
-                className="hover:underline text-blue-600"
-                href={`/${store.id}/billboards/${billboard.id}`}
-              >
-                {billboard.id}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <BillboardsList billboards={billboards} />
       </div>
     </div>
   );

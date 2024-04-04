@@ -16,7 +16,7 @@ export function MainNavigation() {
     },
     {
       href: `/${params.storeId}/billboards`,
-      label: "Billboard",
+      label: "Billboards",
     },
     {
       href: `/${params.storeId}/settings`,

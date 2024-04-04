@@ -27,7 +27,7 @@ model Store {
 model Billboard {
   id        String   @id @default(uuid())
   storeId   String
-  store     Store    @relation("StoreToBillboard", fields: [storeId], references: [id])
+  store     Store    @relation("StoreToBillboard", fields: [storeId], references: [id], onDelete: Cascade)
   label     String
   imageUrl  String
   createdAt DateTime @default(now())
