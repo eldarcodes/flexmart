@@ -3,10 +3,12 @@ import axios from "axios";
 
 export interface CreateBillboardInput {
   label: string;
+  imageUrl: string;
 }
 
 export interface UpdateBillboardInput {
   label: string;
+  imageUrl: string;
 }
 
 export const list = async (storeId: string) => {
