@@ -3,10 +3,12 @@ import axios from "axios";
 
 export interface CreateCategoryInput {
   name: string;
+  billboardId: string;
 }
 
 export interface UpdateCategoryInput {
   name: string;
+  billboardId: string;
 }
 
 export const list = async (storeId: string) => {

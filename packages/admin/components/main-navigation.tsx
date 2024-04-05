@@ -23,6 +23,14 @@ export function MainNavigation() {
       label: "Categories",
     },
     {
+      href: `/${params.storeId}/sizes`,
+      label: "Sizes",
+    },
+    {
+      href: `/${params.storeId}/colors`,
+      label: "Colors",
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: "Settings",
     },
