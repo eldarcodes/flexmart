@@ -43,6 +43,7 @@ export function CellAction({ data }: CellActionProps) {
       router.refresh();
     },
     onError: () => {
+      setOpen(false);
       toast.error("Failed to delete a billboard.");
     },
   });

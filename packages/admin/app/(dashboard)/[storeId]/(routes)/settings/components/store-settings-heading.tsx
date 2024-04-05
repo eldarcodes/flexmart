@@ -24,10 +24,13 @@ export function StoreSettingsHeading({ store }: StoreSettingsHeadingProps) {
   const removeStoreMutation = useMutation({
     mutationFn: () => StoreApi.remove(store.id),
     onSuccess: () => {
+      setOpen(false);
+
       toast.success("Store deleted successfully.");
       router.refresh();
     },
     onError: () => {
+      setOpen(false);
       toast.error("Failed to delete a store.");
     },
   });
