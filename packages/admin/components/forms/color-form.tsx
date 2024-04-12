@@ -21,6 +21,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import { ColorPickerField } from "./fields/color-picker";
+
 interface ColorFormProps {
   color: Color | null;
 }
@@ -66,12 +68,13 @@ export function ColorForm({ color }: ColorFormProps) {
     resolver: zodResolver(FormSchema),
     defaultValues: color || {
       name: "",
-      value: "",
+      value: "#FF6900",
     },
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    saveColorMutation.mutate(data);
+    // saveColorMutation.mutate(data);
+    console.log("data", data);
   }
 
   return (
@@ -102,19 +105,12 @@ export function ColorForm({ color }: ColorFormProps) {
             name="value"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Value</FormLabel>
+                <FormLabel>Color</FormLabel>
                 <FormControl>
-                  <div className="flex items-center gap-x-4">
-                    <Input
-                      disabled={saveColorMutation.isPending}
-                      placeholder="Enter color value"
-                      {...field}
-                    />
-                    <div
-                      className="border p-4 rounded-full"
-                      style={{ backgroundColor: field.value }}
-                    />
-                  </div>
+                  <ColorPickerField
+                    value={field.value}
+                    onChange={(color) => field.onChange(color)}
+                  />
                 </FormControl>
 
                 <FormMessage />

@@ -38,6 +38,7 @@
     "next-cloudinary": "^6.3.0",
     "next-themes": "^0.3.0",
     "react": "^18",
+    "react-color": "^2.19.3",
     "react-dom": "^18",
     "react-hook-form": "^7.51.2",
     "sonner": "^1.4.41",
@@ -49,6 +50,7 @@
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
+    "@types/react-color": "^3.0.12",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
