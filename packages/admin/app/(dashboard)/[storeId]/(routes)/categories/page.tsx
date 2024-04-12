@@ -3,11 +3,11 @@ import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
 import { Separator } from "@/components/ui/separator";
+import { Heading } from "@/components/ui/heading";
+import { ApiList } from "@/components/api-list";
 
 import { CategoriesHeading } from "./components/categories-heading";
 import { CategoriesList } from "./components/categories-list";
-import { Heading } from "@/components/ui/heading";
-import { ApiList } from "@/components/api-list";
 
 interface CategoriesPageProps {
   params: {

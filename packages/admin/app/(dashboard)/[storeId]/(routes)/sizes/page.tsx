@@ -3,11 +3,11 @@ import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
 import { Separator } from "@/components/ui/separator";
+import { Heading } from "@/components/ui/heading";
+import { ApiList } from "@/components/api-list";
 
 import { SizesHeading } from "./components/sizes-heading";
 import { SizesList } from "./components/sizes-list";
-import { Heading } from "@/components/ui/heading";
-import { ApiList } from "@/components/api-list";
 
 interface SizesPageProps {
   params: {

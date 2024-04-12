@@ -1,8 +1,8 @@
 import { db } from "@/lib/db";
 import { Separator } from "@/components/ui/separator";
+import { CategoryForm } from "@/components/forms/category-form";
 
 import { CategoryHeading } from "./components/category-heading";
-import { CategoryForm } from "@/components/forms/category-form";
 
 export default async function CategoryPage({
   params,
