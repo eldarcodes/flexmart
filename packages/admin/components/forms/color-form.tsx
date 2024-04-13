@@ -73,8 +73,7 @@ export function ColorForm({ color }: ColorFormProps) {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    // saveColorMutation.mutate(data);
-    console.log("data", data);
+    saveColorMutation.mutate(data);
   }
 
   return (
