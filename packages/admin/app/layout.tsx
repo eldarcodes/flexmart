@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ModalProvider } from "@/providers/modal-provider";
 import { QueryProvider } from "@/providers/query-provider";
 import { ToastProvider } from "@/providers/toast-provider";
+import { ProgressProvider } from "@/providers/progress-provider";
 
 import "./globals.css";
 
@@ -28,6 +29,7 @@ export default function RootLayout({
           <body className={inter.className}>
             <ModalProvider />
             <ToastProvider />
+            <ProgressProvider />
 
             <main>{children}</main>
           </body>
