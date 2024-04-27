@@ -3,11 +3,11 @@ import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
 import { Separator } from "@/components/ui/separator";
+import { Heading } from "@/components/ui/heading";
+import { ApiList } from "@/components/api-list";
 
 import { BillboardsHeading } from "./components/billboards-heading";
 import { BillboardsList } from "./components/billboards-list";
-import { Heading } from "@/components/ui/heading";
-import { ApiList } from "@/components/api-list";
 
 interface BillboardsPageProps {
   params: {
