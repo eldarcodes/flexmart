@@ -22,7 +22,7 @@ export function ProductsList({ products }: ProductsListProps) {
     name: product.name,
     isFeatured: product.isFeatured,
     isArchived: product.isArchived,
-    price: formatter.format(1000.99),
+    price: formatter.format(+product.price),
     category: product.category.name,
     size: product.size.name,
     color: product.color.name,

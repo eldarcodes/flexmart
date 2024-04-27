@@ -25,7 +25,7 @@ export const columns: ColumnDef<ProductColumn>[] = [
       <Star
         className={cn(
           "h-6 text-center w-full border-none hover:cursor-pointer hover:fill-yellow-400",
-          !row.original.isFeatured ? "text-yellow-400 fill-yellow-400" : ""
+          row.original.isFeatured ? "text-yellow-400 fill-yellow-400" : ""
         )}
         onClick={() => {
           // @TODO: Implement feature toggle
