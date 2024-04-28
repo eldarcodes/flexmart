@@ -2,8 +2,12 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
 import { MainNavigation } from "@/components/main-navigation";
+import { getCategories } from "@/api/categories";
+import { NavbarActions } from "@/components/navbar-actions";
 
-export function Navbar() {
+export async function Navbar() {
+  const categories = await getCategories();
+
   return (
     <div className="border-b">
       <Container>
@@ -12,7 +16,9 @@ export function Navbar() {
             <p className="font-bold text-xl">STORE</p>
           </Link>
 
-          <MainNavigation data={[]} />
+          <MainNavigation data={categories} />
+
+          <NavbarActions />
         </div>
       </Container>
     </div>
