@@ -36,8 +36,6 @@ export default async function CategoryPage({
   const colors = await getColors();
   const category = await getCategory(params.categoryId);
 
-  console.log(products);
-
   return (
     <div className="bg-white">
       <Container>
