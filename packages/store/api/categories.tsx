@@ -7,3 +7,9 @@ export const getCategories = async (): Promise<Category[]> => {
 
   return response.json();
 };
+
+export const getCategory = async (id: string): Promise<Category> => {
+  const response = await fetch(`${URL}/${id}`);
+
+  return response.json();
+};
