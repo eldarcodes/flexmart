@@ -6,6 +6,7 @@ import { ModalProvider } from "@/providers/modal-provider";
 import { QueryProvider } from "@/providers/query-provider";
 import { ToastProvider } from "@/providers/toast-provider";
 import { ProgressProvider } from "@/providers/progress-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 import "./globals.css";
 
@@ -31,7 +32,14 @@ export default function RootLayout({
             <ToastProvider />
             <ProgressProvider />
 
-            <main>{children}</main>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <main>{children}</main>
+            </ThemeProvider>
           </body>
         </html>
       </ClerkProvider>
