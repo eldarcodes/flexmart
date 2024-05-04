@@ -39,7 +39,9 @@ export function Summary() {
         </div>
       </div>
 
-      <CheckoutForm />
+      <div className="mt-5">
+        <CheckoutForm />
+      </div>
     </div>
   );
 }

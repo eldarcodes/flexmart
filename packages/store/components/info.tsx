@@ -1,16 +1,22 @@
 "use client";
 
-import { ShoppingCart } from "lucide-react";
+import { Check, ShoppingCart } from "lucide-react";
 
 import { Product } from "@/types";
 import { Currency } from "@/components/ui/currency";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/hooks/use-cart";
+import { cn } from "@/lib/utils";
 
 interface InfoProps {
   product: Product;
 }
 
 export function Info({ product }: InfoProps) {
+  const cart = useCart();
+
+  const isAlreadyInCart = cart.items.some((item) => item.id === product.id);
+
   return (
     <div>
       <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
@@ -38,8 +44,15 @@ export function Info({ product }: InfoProps) {
       </div>
 
       <div className="mt-10 flex items-center gap-x-3">
-        <Button className="flex items-center gap-x-2">
-          Add to Cart <ShoppingCart />
+        <Button
+          onClick={() => cart.addItem(product)}
+          className={cn(
+            "flex items-center gap-x-2",
+            isAlreadyInCart && "bg-green-500"
+          )}
+        >
+          {isAlreadyInCart ? "Added to cart" : "Add to cart"}
+          {isAlreadyInCart ? <Check /> : <ShoppingCart />}
         </Button>
       </div>
     </div>
