@@ -17,7 +17,7 @@ export function Summary() {
 
   useEffect(() => {
     if (searchParams.get("success")) {
-      toast.success("Order placed successfully");
+      toast.success("Order placed successfully", { id: "order-success" });
       removeAll();
     }
 
@@ -49,8 +49,12 @@ export function Summary() {
         </div>
       </div>
 
-      <Button className="w-full mt-6" onClick={onCheckout}>
-        Checkout
+      <Button
+        disabled={!items.length}
+        className="w-full mt-6"
+        onClick={onCheckout}
+      >
+        Place Order
       </Button>
     </div>
   );
