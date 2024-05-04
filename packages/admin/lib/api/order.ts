@@ -34,13 +34,39 @@ export const remove = async (storeId: string, productId: string) => {
   return axios.delete(`/api/stores/${storeId}/products/${productId}`);
 };
 
-export const getStockCount = async (storeId: string) => {
-  const stockCount = await db.product.count({
+export const getTotalRevenue = async (storeId: string) => {
+  const paidOrders = await db.order.findMany({
     where: {
       storeId,
-      isArchived: false,
+      isPaid: true,
+    },
+    include: {
+      orderItems: {
+        include: {
+          product: true,
+        },
+      },
     },
   });
 
-  return stockCount;
+  const totalRevenue = paidOrders.reduce((total, order) => {
+    const orderTotal = order.orderItems.reduce((acc, orderItem) => {
+      return acc + +orderItem.product.price;
+    }, 0);
+
+    return total + orderTotal;
+  }, 0);
+
+  return totalRevenue;
+};
+
+export const getSalesCount = async (storeId: string) => {
+  const salesCount = await db.order.count({
+    where: {
+      storeId,
+      isPaid: true,
+    },
+  });
+
+  return salesCount;
 };
