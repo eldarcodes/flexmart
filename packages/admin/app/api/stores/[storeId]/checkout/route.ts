@@ -17,16 +17,26 @@ export async function POST(
   { params }: { params: { storeId: string } }
 ) {
   try {
-    const { productIds } = await req.json();
+    const { productIds, address, phone } = await req.json();
 
     if (!productIds || !productIds.length) {
       return new Response("Product ids are required", { status: 400 });
+    }
+
+    if (!address) {
+      return new Response("Address is required", { status: 400 });
+    }
+
+    if (!phone) {
+      return new Response("Phone is required", { status: 400 });
     }
 
     await db.order.create({
       data: {
         storeId: params.storeId,
         isPaid: true,
+        address,
+        phone,
         orderItems: {
           create: productIds.map((productId: string) => ({
             product: {

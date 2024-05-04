@@ -1,13 +1,12 @@
 "use client";
 
-import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
-import { Button } from "@/components/ui/button";
 import { Currency } from "@/components/ui/currency";
 import { useCart } from "@/hooks/use-cart";
+import { CheckoutForm } from "@/components/forms/checkout-form";
 
 export function Summary() {
   const searchParams = useSearchParams();
@@ -27,16 +26,7 @@ export function Summary() {
     }
   }, [searchParams, removeAll]);
 
-  const onCheckout = async () => {
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/checkout`,
-      {
-        productIds: items.map((item) => item.id),
-      }
-    );
-
-    window.location = response.data.url;
-  };
+  const onCheckout = async () => {};
 
   return (
     <div className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
@@ -49,13 +39,7 @@ export function Summary() {
         </div>
       </div>
 
-      <Button
-        disabled={!items.length}
-        className="w-full mt-6"
-        onClick={onCheckout}
-      >
-        Place Order
-      </Button>
+      <CheckoutForm />
     </div>
   );
 }
