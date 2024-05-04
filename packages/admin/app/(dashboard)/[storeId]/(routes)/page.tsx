@@ -5,7 +5,8 @@ import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatter } from "@/lib/utils";
 import { getSalesCount, getTotalRevenue } from "@/lib/api/order";
-import { getStockCount } from "@/lib/api/product";
+import { getOverviewGraphData, getStockCount } from "@/lib/api/product";
+import { Overview } from "@/components/overview";
 
 interface DashboardPageProps {
   params: { storeId: string };
@@ -15,6 +16,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
   const totalRevenue = await getTotalRevenue(params.storeId);
   const salesCount = await getSalesCount(params.storeId);
   const stockCount = await getStockCount(params.storeId);
+  const graphData = await getOverviewGraphData(params.storeId);
 
   const salesCountLabel = salesCount ? `+${salesCount}` : 0;
 
@@ -65,6 +67,16 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
             </CardContent>
           </Card>
         </div>
+
+        <Card className="col-span-4">
+          <CardHeader>
+            <CardTitle>Overview</CardTitle>
+          </CardHeader>
+
+          <CardContent className="pl-2">
+            <Overview data={graphData} />
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
