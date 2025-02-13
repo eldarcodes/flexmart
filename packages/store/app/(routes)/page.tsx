@@ -5,7 +5,7 @@ import { ProductList } from "@/components/product-list";
 import { Container } from "@/components/ui/container";
 
 export default async function HomePage() {
-  const billboard = await getBillboard("1cc34421-9b58-4cc6-8ab0-372a65c9db94");
+  const billboard = await getBillboard("c5ac9789-9850-4808-987c-7fe7488907af");
 
   const products = await getProducts({ isFeatured: true });
 
